@@ -1,42 +1,35 @@
-import bannerImage from "./assets/react-core-concepts.png";
-const keyWords = ["Fundamental", "Crucial", "Core"];
+//Components
+import Banner from "./components/Banner/Banner.jsx";
+import CoreConcepts from "./components/CoreConcepts.jsx";
+import TabButton from "./components/Button/TabButton.jsx"
 
-function calculateRandomInt(max) {
-  return Math.floor(Math.random() * (max + 1));
-}
-
-function Banner() {
-  const description = keyWords[calculateRandomInt(2)];
-
-  return (
-    <header>
-      <img src={bannerImage} alt="Stylized atom" />
-      <h1>React Fundamentals</h1>
-      <p>
-        {description} React concepts you will need for almost any app you are
-        going to build!
-      </p>
-    </header>
-  );
-}
-
-function CoreConcepts() {
-  return (
-    <li>
-      <img src={"img"} alt={"alt"} />
-      <h3>{"Title"}</h3>
-      <p>{"Descripting"}</p>
-    </li>
-  );
-}
+//Dummy Data
+import { CORE_CONCEPTS } from "./data";
 
 function App() {
   return (
     <div>
       <Banner />
       <main>
-        <section id="core-concept">
-          <h2>Time to get started!</h2>
+        <section id="core-concepts">
+          <h2>Core Concepts</h2>
+          <ul>
+            {CORE_CONCEPTS.map((data) => (
+              <CoreConcepts
+                title={data.title}
+                description={data.description}
+                image={data.image}
+              />
+            ))}
+          </ul>
+        </section>
+        <section id='examples'>
+          <h2>Examples</h2>
+          <menu>
+              <TabButton>
+                testing 
+              </TabButton>
+          </menu>
         </section>
       </main>
     </div>
