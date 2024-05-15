@@ -16,6 +16,20 @@ function App() {
   function handleSelect(tabName) {
     setActiveTab(tabName);
   }
+
+  let tabContent = <p>Please Select a button</p>
+
+  if (activeTab){
+    tabContent = (
+      <div id="tab-content">
+            <h3>{EXAMPLES[activeTab].title}</h3>
+            <p>{EXAMPLES[activeTab].description}</p>
+            <pre>
+              <code>{EXAMPLES[activeTab].code}</code>
+            </pre>
+          </div>
+    )
+  }
   
   return (
     <div>
@@ -27,10 +41,8 @@ function App() {
             {CORE_CONCEPTS.map((data, index) => {
               return (
                 <CoreConcepts
-                  key={index}
-                  title={data.title}
-                  description={data.description}
-                  image={data.image}
+                key={index}
+                  {...data}
                 />
               );
             })}
@@ -39,18 +51,12 @@ function App() {
         <section id="examples">
           <h2>Examples</h2>
           <menu>
-            <TabButton onSelect={() => handleSelect("components")}>Components</TabButton>
-            <TabButton onSelect={() => handleSelect("jsx")}> JSX </TabButton>
-            <TabButton onSelect={() => handleSelect("props")}>Props</TabButton>
-            <TabButton onSelect={() => handleSelect("state")}>State</TabButton>
+            <TabButton isSelected={activeTab === 'components'} onSelect={() => handleSelect("components")}>Components</TabButton>
+            <TabButton isSelected={activeTab === 'jsx'} onSelect={() => handleSelect("jsx")}> JSX </TabButton>
+            <TabButton isSelected={activeTab === 'props'} onSelect={() => handleSelect("props")}>Props</TabButton>
+            <TabButton isSelected={activeTab === 'state'} onSelect={() => handleSelect("state")}>State</TabButton>
           </menu>
-          <div id="tab-content">
-            <h3>{EXAMPLES[activeTab].title}</h3>
-            <p>{EXAMPLES[activeTab].description}</p>
-            <pre>
-              <code>{EXAMPLES[activeTab].code}</code>
-            </pre>
-          </div>
+          {tabContent}
         </section>
       </main>
     </div>
